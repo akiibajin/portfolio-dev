@@ -1,0 +1,85 @@
+---
+import Separator from "./Separator.astro";
+import Settings from "./icons/Settings.astro";
+import People from "./icons/People.astro";
+import Linkedin from "./icons/Linkedin.astro";
+import Folder from "./icons/Folder.astro";
+import Bell from "./icons/Bell.astro";
+import XboxA from "./icons/Xbox-A.astro";
+---
+
+<footer class="fixed bottom-10 left-0 w-full px-8">
+  <nav class="ml-4 mb-6">
+    <ul class="flex gap-10">
+      <li class="flex flex-col gap-1.5 text-xs justify-center">
+        <Settings className="mx-auto w-8  hover:bg-[#D43458]" />Options
+      </li>
+      <li class="flex flex-col gap-1.5 text-xs justify-center opacity-50">
+        <People className="mx-auto" />Community
+      </li>
+      <li>
+        <a
+          class="flex flex-col gap-1.5 text-xs justify-center"
+          target="_blank"
+          href="https://www.linkedin.com/in/hec-rob-dev/"
+          ><Linkedin className="mx-auto w-8  hover:bg-[#D43458]" />Linkedin</a
+        >
+      </li>
+      <li class="flex flex-col gap-1.5 text-xs justify-center opacity-50">
+        <Folder className="mx-auto" />Play Data
+      </li>
+      <li class="flex flex-col gap-1.5 text-xs justify-center">
+        <Bell className="mx-auto" />News
+      </li>
+    </ul>
+  </nav>
+  <div class="w-[45vw] overflow-hidden whitespace-nowrap">
+    <p class="inline-block text-cyan-300" id="info">
+      Here you can find a resume of each tab
+    </p>
+  </div>
+  <Separator
+    color="blue-300"
+    orientation="horizontal"
+    additionalClass="border-cyan-300 w-[45vw]"
+    size={"[45vw]"}
+  />
+  <div class="flex text-white mt-2.5">
+    <p class="flex gap-1.5 text-xs items-center">
+      <XboxA className="mx-auto w-3.5" />
+      <span class="h-min">Confirm</span>
+    </p>
+  </div>
+</footer>
+<script>
+  import { currentTab } from "../store";
+  import { defs } from "../global/constants";
+  currentTab.subscribe((value) => {
+    const info = document.getElementById("info");
+    if (info) {
+      info.classList.remove("animate-marquee");
+      info.textContent = defs?.[value.name] || defs.Frontend;
+      setTimeout(() => {
+        info.classList.add("animate-marquee");
+      }, 5000);
+    }
+  });
+</script>
+
+<style>
+  @keyframes marquee {
+    from {
+      transform: translateX(-25%);
+    }
+    to {
+      transform: translateX(-90%);
+    }
+  }
+
+  .animate-marquee {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 20s linear 2;
+    animation-delay: 2s;
+  }
+</style>

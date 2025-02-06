@@ -1,0 +1,26 @@
+---
+import DynamicMenu from "../components/svelte/DynamicMenu.svelte";
+import Layout from "../layouts/Layout.astro";
+const tabs = [
+  {
+    name: "Rust",
+    path: "/Frontend content",
+  },
+  {
+    name: "Angular",
+    path: "/Backend content",
+  },
+  {
+    name: "Qwick",
+    path: "/DevOps content",
+  },
+  {
+    name: "Tauri",
+    path: "/Design content",
+  },
+];
+---
+
+<Layout title="Learning">
+  <DynamicMenu tabs={tabs} disabled client:only="svelte" />
+</Layout>
