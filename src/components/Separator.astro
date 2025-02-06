@@ -1,0 +1,24 @@
+---
+interface Props {
+  orientation?: "horizontal" | "vertical";
+  size?: string | number;
+  additionalClass?: string;
+  color?: string;
+}
+const {
+  orientation = "vertical",
+  size = 1,
+  additionalClass,
+  color = "gray-300",
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    orientation === "horizontal" ? "border-t" : "border-l",
+    orientation === "horizontal" ? `w-${size}` : `h-${size}`,
+    `border-${color}`,
+    additionalClass,
+  ]}
+>
+</div>
