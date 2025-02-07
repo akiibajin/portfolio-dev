@@ -1,10 +1,14 @@
 <script lang="ts">
   import {onMount} from "svelte";
   import { register, type SwiperContainer } from "swiper/element";
+  import { isOpenNews } from "../../store"
   import type { SwiperOptions } from "swiper/types";
   register();
 
-
+  let isOpen = $state(window.innerWidth > 640);
+  isOpenNews.subscribe((value) => {
+    isOpen = value;
+  });
   onMount(() => {
     const swiperEl: SwiperContainer | null = document.querySelector("#news");
   if (swiperEl) {
@@ -22,9 +26,14 @@
   }
   });
 </script>
-<aside class="fixed bottom-30 bg-transparent right-10 w-60 h-30 rounded-lg">
+<aside class={`${isOpen ? "fixed scale-100 opacity-100 " : "hidden scale-0 opacity-0"} 
+lg:fixed lg:scale-100 lg:opacity-100 starting:scale-0 starting:opacity-0  transition-discrete
+ transition-all duration-400 bottom-50 lg:bottom-30 bg-transparent right-3 
+ lg:right-10 w-60 h-30 rounded-lg
+`}
+>
   <div
-    class="relative p-px bg-gradient-to-r w-60 h-24 from-blue-500 bg-opacity-70 to-purple-500 overflow-hidden rounded-lg"
+    class="relative top-0 p-px bg-gradient-to-r w-60 h-24 from-blue-500 bg-opacity-70 to-purple-500 overflow-hidden rounded-lg"
   >
     <swiper-container
       space-between={5}
@@ -72,7 +81,7 @@
   </div>
   <div
     id="pagination"
-    class="absolute text-center transition-opacity w-full duration-300transform translate-x-0 translate-y-0 z-10"
+    class="absolute text-end lg:text-center transition-opacity w-full duration-300transform translate-x-0 translate-y-0 z-10"
   >
   </div>
 </aside>

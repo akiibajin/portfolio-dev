@@ -6,8 +6,13 @@ import ThirdSlide from "./ThirdSlide.astro";
 import FourthSlide from "./FourthSlide.astro";
 ---
 
-<div class="fixed top-0 left-0 size-full z-[-1]">
-  <swiper-container slides-per-view="1" effect="fade" class="size-full">
+<div class="fixed top-0 left-0 size-full -z-1">
+  <swiper-container
+    allow-touch-move="false"
+    slides-per-view="1"
+    effect="fade"
+    class="size-full"
+  >
     <swiper-slide>
       <FirstSlide />
     </swiper-slide>

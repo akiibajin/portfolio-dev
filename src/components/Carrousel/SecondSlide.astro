@@ -1,13 +1,13 @@
 <div class="font">
-  <div class="light x1"></div>
+  <div class="light x1 hidden sm:block"></div>
   <div class="light x2"></div>
-  <div class="light x3"></div>
+  <div class="light x3 hidden sm:block"></div>
   <div class="light x4"></div>
   <div class="light x5"></div>
-  <div class="light x6"></div>
-  <div class="light x7"></div>
+  <div class="light x6 hidden sm:block"></div>
+  <div class="light x7 hidden sm:block"></div>
   <div class="light x8"></div>
-  <div class="light x9"></div>
+  <div class="light x9 hidden sm:block"></div>
 </div>
 <style>
   /* Second scenario */
@@ -28,7 +28,6 @@
   .light {
     position: absolute;
     width: 0px;
-    opacity: 0.75;
     background-color: white;
     box-shadow: #e9f1f1 0px 0px 20px 2px;
     opacity: 0;
@@ -132,7 +131,6 @@
     transform: scale(1.7);
     left: 62%;
   }
-
   .x9 {
     -webkit-animation: floatUp 4.1s infinite linear;
     -moz-animation: floatUp 4.1s infinite linear;
@@ -146,66 +144,6 @@
   }
 
   @-webkit-keyframes floatUp {
-    0% {
-      top: 100vh;
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    50% {
-      top: 0vh;
-      opacity: 0.8;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      top: -100vh;
-      opacity: 0;
-    }
-  }
-  @-moz-keyframes floatUp {
-    0% {
-      top: 100vh;
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    50% {
-      top: 0vh;
-      opacity: 0.8;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      top: -100vh;
-      opacity: 0;
-    }
-  }
-  @-o-keyframes floatUp {
-    0% {
-      top: 100vh;
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    50% {
-      top: 0vh;
-      opacity: 0.8;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      top: -100vh;
-      opacity: 0;
-    }
-  }
-  @keyframes floatUp {
     0% {
       top: 100vh;
       opacity: 0;
