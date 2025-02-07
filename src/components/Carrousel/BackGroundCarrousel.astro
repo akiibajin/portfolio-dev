@@ -1,0 +1,39 @@
+---
+import "swiper/css";
+import FirstSlide from "./FirstSlide.astro";
+import SecondSlide from "./SecondSlide.astro";
+import ThirdSlide from "./ThirdSlide.astro";
+import FourthSlide from "./FourthSlide.astro";
+---
+
+<div class="fixed top-0 left-0 size-full -z-1">
+  <swiper-container
+    allow-touch-move="false"
+    slides-per-view="1"
+    effect="fade"
+    class="size-full"
+  >
+    <swiper-slide>
+      <FirstSlide />
+    </swiper-slide>
+    <swiper-slide>
+      <SecondSlide />
+    </swiper-slide>
+    <swiper-slide>
+      <ThirdSlide />
+    </swiper-slide>
+    <swiper-slide> <FourthSlide /></swiper-slide>
+  </swiper-container>
+</div>
+
+<script>
+  import { register } from "swiper/element/bundle";
+  import { currentTab } from "../../store";
+  register();
+  currentTab.subscribe((value) => {
+    const swiperEl = document.querySelector("swiper-container");
+    if (swiperEl) {
+      swiperEl.swiper.slideTo(value.position);
+    }
+  });
+</script>

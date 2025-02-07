@@ -1,0 +1,24 @@
+---
+import DynamicMenu from "../components/svelte/DynamicMenu.svelte";
+import Layout from "../layouts/Layout.astro";
+const tabs = [
+  {
+    name: "Professional Experience",
+  },
+  {
+    name: "Personal Experience",
+  },
+  {
+    name: "Freelance Experience",
+  },
+  {
+    name: "Certifications",
+  },
+];
+---
+
+<Layout title="Experience">
+  <main class="lg:m-0!">
+    <DynamicMenu tabs={tabs} client:only="svelte" />
+  </main>
+</Layout>
