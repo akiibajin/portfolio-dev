@@ -31,7 +31,7 @@ export const defs: IDefs = {
 export const knowledgeSection = {
   Frontend: {
     title: "Frontend",
-    content: `<p class='p-3 text-pretty'>
+    content: `<p class='p-3 text-pretty font-light tracking-tighter'>
     My main experience is with <strong>ReactJs</strong>, 
    but I also have experience with <strong>Angular, svelte, 
    preact, jquery, vanilla and Astro</strong>. 

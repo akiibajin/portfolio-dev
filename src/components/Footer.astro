@@ -4,11 +4,13 @@ import Settings from "./icons/Settings.astro";
 import People from "./icons/People.astro";
 import Linkedin from "./icons/Linkedin.astro";
 import Folder from "./icons/Folder.astro";
-import Bell from "./icons/Bell.astro";
+import Bell from "./icons/Bell.svelte";
 import XboxA from "./icons/Xbox-A.astro";
 ---
 
-<footer class="fixed bottom-10 left-0 w-full px-8">
+<footer
+  class="absolute lg:fixed px-4 bottom-18 lg:bottom-10 left-0 lg:w-full lg:px-8"
+>
   <nav class="ml-4 mb-6">
     <ul class="flex gap-10">
       <li class="flex flex-col gap-1.5 text-xs justify-center">
@@ -28,12 +30,14 @@ import XboxA from "./icons/Xbox-A.astro";
       <li class="flex flex-col gap-1.5 text-xs justify-center opacity-50">
         <Folder className="mx-auto" />Play Data
       </li>
-      <li class="flex flex-col gap-1.5 text-xs justify-center">
-        <Bell className="mx-auto" />News
+      <li
+        class="flex flex-col gap-1.5 text-xs lg:pointer-events-none justify-center"
+      >
+        <Bell client:only="svelte" className="mx-auto" />News
       </li>
     </ul>
   </nav>
-  <div class="w-[45vw] overflow-hidden whitespace-nowrap">
+  <div class="w-[70vw] sm:w-[45vw] overflow-hidden whitespace-nowrap">
     <p class="inline-block text-cyan-300" id="info">
       Here you can find a resume of each tab
     </p>
@@ -41,7 +45,7 @@ import XboxA from "./icons/Xbox-A.astro";
   <Separator
     color="blue-300"
     orientation="horizontal"
-    additionalClass="border-cyan-300 w-[45vw]"
+    additionalClass="border-cyan-300 w-[70vw] sm:w-[45vw]"
     size={"[45vw]"}
   />
   <div class="flex text-white mt-2.5">

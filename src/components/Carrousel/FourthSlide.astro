@@ -1,8 +1,15 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import fourthSlide from "../../assets/fourthSlide.webp";
 ---
 
 <div class="size-full fixed top-0 left-0">
-  <Image class="size-full" src={fourthSlide} alt={"fourth slide"} />
+  <Picture
+    class="size-full"
+    src={fourthSlide}
+    widths={[240, 540, 720, fourthSlide.width]}
+    sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${fourthSlide.width}px`}
+    loading="lazy"
+    alt={"fourth slide"}
+  />
 </div>

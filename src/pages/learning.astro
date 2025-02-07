@@ -22,5 +22,7 @@ const tabs = [
 ---
 
 <Layout title="Learning">
-  <DynamicMenu tabs={tabs} disabled client:only="svelte" />
+  <main class="lg:m-0!">
+    <DynamicMenu tabs={tabs} disabled client:only="svelte" />
+  </main>
 </Layout>
