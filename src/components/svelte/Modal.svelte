@@ -35,7 +35,7 @@
 
 <div class="top-0 left-0 w-dvw h-dvh z-1 bg-black/75" class:hidden={!isOpen} class:fixed={isOpen} ></div>
 <dialog
-  class="bg-black text-white border-[1px] fixed top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2   border-cyan-800 p-px max-w-lg rounded-sm shadow-lg transition duration-300 z-1"
+  class="bg-black text-white border-[1px] fixed top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 border-cyan-800 p-px w-full sm:max-w-lg rounded-sm shadow-lg transition duration-300 z-1"
   open={isOpen}
 >
     <button
@@ -48,7 +48,7 @@
       <h4 class="text-center" bind:innerHTML={titleEl} contenteditable="true"></h4>
     </div>
     <div class="bg-gray-600 rounded-b-sm py-6 px-8">
-      <div bind:innerHTML={contentEl} contenteditable="true"></div>
+      <div bind:innerHTML={contentEl} class="mb-6" contenteditable="true"></div>
       <ModalTable />
     </div>
 </dialog>

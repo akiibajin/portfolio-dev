@@ -10,3 +10,5 @@ export const isOpenModal = atom<boolean>(false);
 
 export const toggleModal = (flag?: boolean) =>
   isOpenModal.set(flag !== undefined ? flag : !isOpenModal.get());
+
+export const isOpenNews = atom<boolean>(window.innerWidth > 640);
