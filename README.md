@@ -1,54 +1,31 @@
-# Astro Starter Kit: Basics
+# Hector's Developer Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+Welcome to my developer portfolio! Here you'll find information about my projects, skills, and experience.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## About Me
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+I am a passionate developer with experience in various programming languages and technologies. I love creating innovative solutions and continuously learning new things.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Skills
 
-## 🚀 Project Structure
+- **Languages**: JavaScript, Python, Java, C++
+- **Web Development**: HTML, CSS, React, Node.js
+- **Testing Tools**: Jest, Vitest
+- **Databases**: MySQL, MongoDB
+- **Tools**: Git, Docker, VS Code, Intellij Idea  
 
-Inside of your Astro project, you'll see the following folders and files:
+## Projects / works
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### [Tu360 Movility]
+- **Description**: An e-commerce for vehicles.
+- **Technologies Used**: React, Preact, Redux, JsDoc, TypeScript, Vite, Vitest, Jest, Mocha.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### [Working Laboratory]
+- **Description**: Project based on recruitment and measure the candidates status.
+- **Technologies Used**: React, TypeScript, .Net.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Contact
 
-Any static assets, like images, can be placed in the `public/` directory.
+Feel free to reach out to me via [julianrobayo8000@gmail.com](mailto:julianrobayo8000@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/hec-rob-dev/).
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Thank you for visiting my portfolio!

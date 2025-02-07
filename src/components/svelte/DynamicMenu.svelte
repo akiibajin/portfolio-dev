@@ -27,7 +27,7 @@
     />
     <button
       onclick={()=>!disabled &&  toggleModal()}
-      class="w-full cursor-pointer rounded-xs pl-3 text-left group-hover:[box-shadow:0_0_10px_#553152,0_0_20px_#553152] group-hover:bg-gradient-to-r from-[#D43458] to-[#553152] text-xl text-gray-100 opacity-50 group-hover:opacity-100 transition-[background-color] delay-100 duration-300 ease-in-out"      
+      class="w-full cursor-pointer rounded-xs pl-3 text-left group-hover:[box-shadow:0_0_10px_#553152,0_0_20px_#553152] group-hover:bg-gradient-to-r from-[#D43458] to-[#553152] text-xl text-gray-100 opacity-50 group-hover:opacity-100 transition-[background-color] delay-100 duration-300 ease-in-out"            
     >
       {tab.name}
   </button>
