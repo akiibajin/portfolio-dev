@@ -1,0 +1,134 @@
+<aside popover="manual" popover-open="true" id="news" class="popover-news">
+  <div
+    class="relative top-0 p-px bg-gradient-to-r w-60 h-24 from-blue-500 bg-opacity-70 to-purple-500 overflow-hidden rounded-lg"
+  >
+    <swiper-container
+      space-between={5}
+      pagination="true"
+      slides-per-view={1}
+      autoplay={true}
+      init="false"
+      id="news-swiper"
+      class="h-full w-full bg-black rounded-lg"
+    >
+      <swiper-slide
+        lazy="true"
+        class="flex overflow-hidden rounded-lg items-end justify-center h-full"
+      >
+        <img
+          src="https://th.bing.com/th/id/OIP.Z_QVk4-ITobZ5RNpCEp20gHaEK?rs=1&pid=ImgDetMain"
+          alt="marshall law"
+          loading="lazy"
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        />
+        <p
+          id="info-p"
+          class="text-pretty text-white font-thin text-sm absolute bottom-0"
+        >
+          New version for this portfolio will come soon 🔥
+        </p>
+      </swiper-slide>
+      <swiper-slide
+        lazy="true"
+        class="flex items-end overflow-hidden rounded-lg justify-center h-full"
+      >
+        <img
+          src="https://www.videogameschronicle.com/files/2023/02/tekken-8-kazuya.jpg"
+          alt="kazuya mishima"
+          loading="lazy"
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        />
+        <p
+          id="info-p"
+          class="text-pretty text-white font-thin text-sm absolute bottom-0"
+        >
+          Check out our latest project updates ❤️
+        </p>
+      </swiper-slide>
+      <swiper-slide
+        lazy="true"
+        class="flex items-end overflow-hidden rounded-lg justify-center h-full"
+      >
+        <img
+          src="https://th.bing.com/th/id/R.9cea29d04f4e05317e0bc506dea5193a?rik=qpqfRbXPTyY9gg&pid=ImgRaw&r=0"
+          loading="lazy"
+          alt="jin kazama"
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        />
+        <p
+          id="info-p"
+          class="text-pretty text-white font-thin text-sm absolute bottom-0"
+        >
+          This images are has been lazy loaded 🚀
+        </p>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+  <div
+    id="pagination"
+    class="absolute text-end h-4 lg:text-center transition-opacity w-full duration-300transform translate-x-0 translate-y-0 z-10"
+  >
+  </div>
+</aside>
+<script>
+  import { register, type SwiperContainer } from "swiper/element";
+  import type { SwiperOptions } from "swiper/types";
+  register();
+  document.addEventListener("astro:page-load", () => {
+    const swiperEl: SwiperContainer | null =
+      document.querySelector("#news-swiper");
+    if (swiperEl) {
+      const options: SwiperOptions = {
+        pagination: {
+          clickable: false,
+          el: "#pagination",
+          bulletActiveClass: "bg-white opacity-100",
+          bulletClass:
+            "size-2! rounded-full bg-black inline-block opacity-50 mx-1",
+        },
+      };
+      Object.assign(swiperEl, options);
+      swiperEl.initialize();
+
+      const popover = document.getElementById("news");
+      if (window.innerWidth > 648 && popover) {
+        popover.showPopover();
+      }
+    }
+  });
+</script>
+
+<style>
+  .popover-news:popover-open {
+    scale: 1;
+    transition: scale 0.2s ease-in-out;
+    @starting-style {
+      scale: 0;
+    }
+  }
+  .popover-news {
+    bottom: 12.5rem;
+    right: 0.75rem;
+    top: auto;
+    left: auto;
+    width: 15rem;
+    height: 7.5rem;
+    border-radius: 0.5rem;
+    position: fixed;
+    background-color: transparent;
+    scale: 0;
+    z-index: 1;
+    transition:
+      scale 0.15s ease-in-out,
+      display 0.15s ease-in-out allow-discrete;
+  }
+  #info-p {
+    text-shadow: 0 0 3px black;
+  }
+  @media (width >= 64rem) {
+    .popover-news {
+      bottom: 7.5rem;
+      right: 2.5rem;
+    }
+  }
+</style>

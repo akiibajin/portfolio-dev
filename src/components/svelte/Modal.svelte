@@ -24,46 +24,95 @@
   };
 
   $effect (() => {
+    const modalPopover = document.getElementById("news");
     if (isOpen) {
+      modalPopover && modalPopover.hidePopover();
       document.addEventListener("keydown", closeOnKeyDown);    
   }
   return () => {
+    modalPopover && modalPopover.showPopover();
     document.removeEventListener("keydown", closeOnKeyDown);
   }
   });
 </script>
 
-<div class="top-0 left-0 w-dvw h-dvh z-1 bg-black/75" class:hidden={!isOpen} class:fixed={isOpen} ></div>
+<div class:modal-dark-veil={isOpen}></div>
 <dialog
-  class="bg-black text-white border-[1px] fixed top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 border-cyan-800 p-px w-full sm:max-w-lg rounded-sm shadow-lg transition duration-300 z-1"
+  class="dialog"
   open={isOpen}
 >
-    <button
-      onclick={() => toggleModal(false)}
-      class="cursor-pointer absolute top-2 right-4 text-2xl"
-    >
+    <button class="close-button" onclick={() => toggleModal(false)}>
       ✖
     </button>
-    <div class="w-full rounded-t-sm bg-cyan-600 p-2">
+    <div class="modal-header">
       <h4 class="text-center" bind:innerHTML={titleEl} contenteditable="true"></h4>
     </div>
-    <div class="bg-gray-600 rounded-b-sm py-6 px-8">
-      <div bind:innerHTML={contentEl} class="mb-6" contenteditable="true"></div>
+    <div class="modal-body">
+      <div bind:innerHTML={contentEl} class="slot" contenteditable="true"></div>
       <ModalTable />
     </div>
 </dialog>
 
 <style>
-  dialog[open] {
+  .modal-dark-veil {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: block;
+  }
+  .dialog[open] {
     scale: 1;
-    transition: scale 0.3s ease-in-out;
+    transition: scale 0.15s ease-in-out;
     @starting-style {
       scale: 0;
     }
   }
-  dialog {
-    transition: scale 0.3s ease, display 0.3s ease allow-discrete;
+  .dialog {
+    transition: scale 0.15s ease, display 0.15s ease allow-discrete;
+    background-color: black;
+    color: white;
+    border-radius: 0.25rem;
+    border: 1px solid oklch(0.45 0.085 224.283);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1px;
+    z-index: 2;
+    width: 100%;
     scale: 0;
   }
-
+  .close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: calc(2 / 1.5);
+  }
+  .modal-header {
+    border-radius: 0.25rem 0.25rem 0 0;
+    width: 100%;
+    background-color: oklch(0.609 0.126 221.723);
+    padding: 0.5rem;
+  }
+  .modal-body {
+    background-color: #4a5565;
+    border-radius: 0 0 0.25rem 0.25rem;
+    padding:1.5rem 2rem;
+  }
+  .slot {
+    margin-bottom: 1.5rem;
+  }
+  @media (width >= 40rem) {
+    .dialog {
+        max-width: 32rem
+    }
+  }
 </style>
