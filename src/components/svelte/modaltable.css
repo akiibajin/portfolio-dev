@@ -1,0 +1,11 @@
+.modal-p {
+    padding: 0.75rem;
+    text-wrap: pretty;
+    font-weight: 100;
+    letter-spacing: 0.05em;
+}
+.modal-p strong { font-weight: 600; }
+.modal-img {
+    margin-inline: auto;
+    height: 1.5rem;
+}

@@ -1,16 +1,22 @@
 
 <script lang="ts">
-    let { path, redNeonBorder } = $props();
+    let { path } = $props();
     let isOpen = $state(false);
+    const navTabs = [
+      { name: "Knowledges", path: "/knowledges" },
+      { name: "Experiences", path: "/experiences" },
+      { name: "Learning", path: "/learning" },
+      { name: "Contact me", path: "/contact" },
+    ];
 </script>
-<div class="flex not-sr-only lg:sr-only">
+<div class="header-nav">
     <button
-    onclick={()=>(isOpen = !isOpen)}
-      class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+    class="menu-button"
+    popovertarget="popover"
+    onclick={()=>(isOpen = !isOpen)}      
     >
-      <span class="sr-only">Open main menu</span>
+      <span>Open main menu</span>
       <svg
-        class="w-6 h-6"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +26,7 @@
           clip-rule="evenodd"></path></svg
       >
       <svg
-        class="hidden w-6 h-6"
+        class="hidden"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -30,69 +36,172 @@
           clip-rule="evenodd"></path></svg
       >
     </button>
-  </div>
-  <div class:hidden={!isOpen} class='fixed sm:hidden top-0 left-0 w-dvw h-dvh bg-neutral-700/50 pointer-events-none z-2'></div>
-  <div
-    class={`${isOpen ? 'h-auto z-2 ' : 'h-0 overflow-hidden z-0 -translate-y-1/2 '}
-    fixed -translate-x-1/2 top-20 bg-gray-800 transition-discrete
-    left-1/2 w-[80dvw] transition-all duration-300 sm:relative 
-    justify-between items-center lg:contents sm:w-max z-1 sm:z-0
-    `}    
-  >
-    <ul
-      class="flex flex-col font-medium items-center lg:flex-row lg:space-x-8 "
-    >
-      <li
-        class={[
-          "mr-0 w-full  lg:border-b-0 border-b-[1px] border-gray-400 text-center lg:w-auto lg:px-6 lg:py-3",
-          path === "/knowledges" ? redNeonBorder : "",
-        ]}
-      >
-        <a
-          href="/knowledges"
-          class="block py-2 w-full lg:w-auto pr-4 pl-3 text-white lg:hover:text-white lg:text-gray-400 lg:border-0 lg:hover:text-primary-700 lg:p-0"
-          >Knowledges</a
+  </div> 
+  <nav popover='auto' id='popover' class={`menu-nav`}>
+    <ul>
+      {#each navTabs as tab}
+        <li
+          class={path.includes(tab.path) ? 'neon' : ''}
         >
-      </li> 
-      <div class='border-l h-6 mx-0 -mb-1.5 hidden lg:block border-gray-300'></div>
-      <li
-        class={[
-          "mr-0 w-full lg:border-b-0 border-b-[1px] border-gray-400 text-center lg:w-auto lg:px-6 lg:py-3",
-          path === "/experiences" ? redNeonBorder : "",
-        ]}
-      >
-        <a
-          href="experiences"
-          class="block py-2 w-full lg:w-auto pr-4 pl-3 text-white lg:hover:text-white lg:text-gray-400 lg:border-0 lg:hover:text-primary-700 lg:p-0"
-          >experiences</a
-        >
-      </li>
-      <div class='border-l h-6 mx-0 -mb-1.5 hidden lg:block border-gray-300'></div>
-      <li
-        class={[
-          "mr-0 w-full lg:border-b-0 border-b-[1px] border-gray-400 text-center lg:w-auto lg:px-6 lg:py-3",
-          path === "/learning" ? redNeonBorder : "",
-        ]}
-      >
-        <a
-          href="/learning"
-          class="block py-2 w-full lg:w-auto pr-4 pl-3 text-white lg:hover:text-white lg:text-gray-400 lg:border-0 lg:hover:text-primary-700 lg:p-0"
-          >Learning</a
-        >
-      </li>
-      <div class='border-l h-6 mx-0 -mb-1.5 hidden lg:block border-gray-300'></div>
-      <li
-        class={[
-          "mr-0 w-full lg:border-b-0 border-b-[1px] border-gray-400 text-center lg:w-auto lg:px-6 lg:py-3",
-          path === "/contact" ? redNeonBorder : "",
-        ]}
-      >
-        <a
-          href="/contact"
-          class="block py-2 w-full lg:w-auto pr-4 pl-3 text-white lg:hover:text-white lg:text-gray-400 lg:border-0 lg:hover:text-primary-700 lg:p-0"
-          >Contact me</a
-        >
-      </li>
-      <div class='border-l h-6 mx-0 -mb-1.5 hidden lg:block border-gray-300'></div>
+          <a
+            href={tab.path}
+            >{tab.name}</a
+          >
+        </li>
+        <div class='separator'></div>
+      {/each}
     </ul>
-  </div>
+  </nav>
+
+  <style>
+    .header-nav {
+      display: flex;
+      position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    }
+    .menu-button{
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem;
+      margin-left: 0.25rem;
+      color: #fff;
+      border-radius: 0.25rem;
+    }
+    .menu-button span {
+      position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+    }
+    .menu-button svg {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+    .menu-button svg.hidden {
+      display: none;
+    }
+
+    .menu-nav:popover-open{
+      scale: 1;
+      transition: scale 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      @starting-style { 
+        scale: 0; 
+      }
+    }
+    .menu-nav{
+      transform: translate(13%, 50%);
+      bottom: 75%;
+      right: 50%;      
+      position: fixed;
+      width: 80dvw;
+      scale: 0;
+      transition: scale 0.3s ease, display 0.3s ease allow-discrete; 
+      background-color: #333;
+    }
+    .menu-nav ul{
+      display: flex;
+      flex-direction: column;      
+      font-weight: 500;
+      align-items: center;
+    }
+    .menu-nav ul li{
+      width: 100%;
+      border-bottom: 1px solid #fff;
+      margin-right: 0;
+      padding-bottom: 0.5rem;
+      text-align: center;
+    }
+    .menu-nav ul li a{
+      display: block;
+      padding: 0.5rem 1rem 0 0.75rem;      
+      width: 100%;
+      text-decoration: none;
+      color: #fff;
+    }
+    .separator {
+      display: none;
+      height: 1.5rem;
+      border: 1px solid #d1d5dc;
+      margin-inline: 0;
+      margin-bottom: -0.375rem;
+    }
+    .neon {
+  position: relative;
+
+}
+.neon:after {
+  content: '';
+  display: none;
+  border-radius: 0.125rem;
+  position: absolute;
+  left: 0;
+  bottom: 0.25rem;
+  width: 100%;
+  height: 4px;
+  background-color: #D43458;
+  box-shadow:0 0 10px #D43458, 0 0 20px #D43458
+}
+@media (width >= 64rem /* 1024px */) {
+  .neon:after {
+    display: block; 
+  }
+}
+    @media (min-width: 48rem){
+      .header-nav{
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+      .menu-button{
+        display: none;
+      }
+      .menu-nav{
+        position: relative;
+        height: auto !important;
+        top: 0;
+        left: 0;
+        scale: 1;
+        width: max-content;
+        background-color: transparent;
+        transform: none;
+        display: flex !important;
+      }
+      .menu-nav ul{
+        flex-direction: row;                  
+      }
+      .menu-nav ul li{
+        border-bottom: 0;        
+        width: auto;
+        padding:  0.75rem;
+      }
+      .menu-nav ul li a{
+        color: #99a1af;
+        width: auto;
+        border: 0;
+        padding: 0;
+      }
+      .menu-nav ul li a:hover{
+        color: #fff;
+      }
+      .separator {
+        display: block;
+      }
+    }
+  </style>

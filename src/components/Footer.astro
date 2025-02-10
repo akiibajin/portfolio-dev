@@ -4,7 +4,7 @@ import Settings from "./icons/Settings.astro";
 import People from "./icons/People.astro";
 import Linkedin from "./icons/Linkedin.astro";
 import Folder from "./icons/Folder.astro";
-import Bell from "./icons/Bell.svelte";
+import Bell from "./icons/Bell.astro";
 import XboxA from "./icons/Xbox-A.astro";
 ---
 
@@ -24,16 +24,14 @@ import XboxA from "./icons/Xbox-A.astro";
           class="flex flex-col gap-1.5 text-xs justify-center"
           target="_blank"
           href="https://www.linkedin.com/in/hec-rob-dev/"
-          ><Linkedin className="mx-auto w-8  hover:bg-[#D43458]" />Linkedin</a
+          ><Linkedin className="mx-auto w-8 hover:bg-[#D43458]" />Linkedin</a
         >
       </li>
       <li class="flex flex-col gap-1.5 text-xs justify-center opacity-50">
         <Folder className="mx-auto" />Play Data
       </li>
-      <li
-        class="flex flex-col gap-1.5 text-xs lg:pointer-events-none justify-center"
-      >
-        <Bell client:only="svelte" className="mx-auto" />News
+      <li class="flex flex-col gap-1.5 text-xs justify-center">
+        <Bell className="mx-auto hover:bg-[#D43458]" />News
       </li>
     </ul>
   </nav>

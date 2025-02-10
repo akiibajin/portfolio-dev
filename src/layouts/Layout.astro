@@ -5,7 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BackGroundCarrousel from "../components/Carrousel/BackGroundCarrousel.astro";
 import Modal from "../components/svelte/Modal.svelte";
-import News from "../components/svelte/News.svelte";
+import News from "../components/News.astro";
 interface Props {
   title: string;
 }
@@ -28,7 +28,7 @@ const { title } = Astro.props;
     <Header />
     <slot />
     <BackGroundCarrousel />
-    <News client:only="svelte" />
+    <News />
     <Modal client:only="svelte" />
     <Footer />
   </body>

@@ -1,29 +1,64 @@
 <script lang="ts">
-    export let firstTitle: string
-    export let secondTitle: string
-    export let additonalTitles: Array<string> | undefined;
-    export let cells: Array<Array<string>>
+  interface Props {
+    firstTitle: string;
+    secondTitle: string;
+    additionalTitles?: Array<string>;
+    cells: Array<Array<string>>;
+  }
+  const {firstTitle = $bindable(), secondTitle = $bindable(), additionalTitles=$bindable([]), cells=$bindable()} : Props = $props();
 </script>
 
-<table class="w-full bg-neutral-950">
-  <thead class="bg-cyan-500">
+<table class="modal-table">
+  <thead>
     <tr>
-      <th class="font-thin text-center py-1 px-3">{firstTitle}</th>
-      <th class="font-light mx-3">{secondTitle}</th>
-        {#each additonalTitles as title}
-            <th class="font-light mx-3">{title}</th>
+      <th class="main-header">{firstTitle}</th>
+      <th class="second-header">{secondTitle}</th>
+        {#each additionalTitles as title}
+            <th class="second-header">{title}</th>
         {/each}
     </tr>
   </thead>
-  <tbody>
+  <tbody class="modal-tbody">
     {#each cells as cell}
-    <tr class="bg-neutral-800 border-b-1 border-b-cyan-600">
-        {#each cell as C}
-          <td class="inset-shadow-sm hover:inset-shadow-cyan-500 border-l-1 px-4 border-l-cyan-600">
-            <div bind:innerHTML={C} contenteditable='true' ></div>
+    <tr>
+        {#each cell as _, i}
+          <td>
+            <div bind:innerHTML={cell[i]} contenteditable='true' ></div>
           </td>
         {/each}
       </tr> 
     {/each}      
   </tbody>
 </table>
+
+<style>
+  .modal-table {
+    width: 100%;
+    background-color: #0a0a0a;
+  }
+  .modal-table thead {
+    background-color: oklch(0.715 0.143 215.221);
+  }
+  .main-header {
+    color: white;
+    font-weight: 100;
+    padding: 0.25rem 0.75rem;
+  }
+  .second-header {
+    color: white;
+    font-weight: 300;
+    margin-inline: 0.75rem;
+  }
+  .modal-tbody tr{
+    background-color: #262626;
+    border: 1px solid oklch(0.609 0.126 221.723);
+  }
+  .modal-tbody td {
+    padding: 0.125rem 1rem;
+    border-left: 1px solid oklch(0.609 0.126 221.723);
+    border: 1px solid oklch(0.609 0.126 221.723);
+  }
+  .modal-tbody td:hover {
+    box-shadow: inset 5px 5px 10px oklch(0.609 0.126 221.723);
+  }
+</style>

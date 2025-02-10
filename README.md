@@ -12,15 +12,17 @@ I am a passionate developer with experience in various programming languages and
 - **Web Development**: HTML, CSS, React, Node.js
 - **Testing Tools**: Jest, Vitest
 - **Databases**: MySQL, MongoDB
-- **Tools**: Git, Docker, VS Code, Intellij Idea  
+- **Tools**: Git, Docker, VS Code, Intellij Idea
 
 ## Projects / works
 
 ### [Tu360 Movility]
+
 - **Description**: An e-commerce for vehicles.
 - **Technologies Used**: React, Preact, Redux, JsDoc, TypeScript, Vite, Vitest, Jest, Mocha.
 
 ### [Working Laboratory]
+
 - **Description**: Project based on recruitment and measure the candidates status.
 - **Technologies Used**: React, TypeScript, .Net.
 
