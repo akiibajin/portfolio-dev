@@ -8,9 +8,7 @@ import Bell from "./icons/Bell.astro";
 import XboxA from "./icons/Xbox-A.astro";
 ---
 
-<footer
-  class="absolute lg:fixed px-4 bottom-18 lg:bottom-10 left-0 lg:w-full lg:px-8"
->
+<footer class="absolute px-4 h-auto bottom-0 left-0 lg:w-full lg:px-8">
   <nav class="ml-4 mb-6">
     <ul class="flex gap-10">
       <li class="flex flex-col gap-1.5 text-xs justify-center">
@@ -55,8 +53,8 @@ import XboxA from "./icons/Xbox-A.astro";
 </footer>
 <script>
   import { currentTab } from "../store";
-  import { defs } from "../global/constants";
-  currentTab.subscribe((value) => {
+  import { defs, type IDefs } from "../global/constants";
+  currentTab.subscribe((value: { name: keyof IDefs; position: number }) => {
     const info = document.getElementById("info");
     if (info) {
       info.classList.remove("animate-marquee");

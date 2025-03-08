@@ -1,15 +1,34 @@
 @import "tailwindcss";
 
+body {
+  margin: 0;
+  height: 100dvh;
+  width: 100dvw;
+  position: relative;
+}
+
 main {
   margin: auto;
   padding: 1rem;
   width: 800px;
   max-width: calc(100% - 2rem);
   color: white;
-  font-size: 20px;
   line-height: 1.6;
+  overflow: auto;
 }
-
+.bullet {
+  width: 0.5rem !important;
+  height: 0.5rem !important;
+  border-radius: 50%;
+  background-color: black;
+  display: inline-block;
+  opacity: 0.5;
+  margin-inline: 0.25rem;
+}
+.bullet-active {
+  background-color: white;
+  opacity: 1;
+}
 @theme {
   --animate-gradient-bg: gradient 15s ease infinite;
   @keyframes gradient {

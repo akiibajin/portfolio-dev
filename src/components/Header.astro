@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import lb from "../assets/R.png";
 import rb from "../assets/rb.png";
 import profile from "../assets/profile.jpg";
-import Separator from "./Separator.astro";
 import HeaderNav from "./svelte/HeaderNav.svelte";
 
 const path = Astro.url.pathname;
@@ -30,7 +29,15 @@ const redNeonBorder =
         alt={"left border"}
         class="hidden lg:block w-9 mr-3"
       />
-      <Separator size={6} additionalClass="hidden lg: mb-[-6px]" />
+      <div
+        class:list={[
+          "border-[1px]",
+          `h-6`,
+          `border-gray-300`,
+          "hidden lg:block mb-[-6px]",
+        ]}
+      >
+      </div>
       <a href="/" class:list={["px-4", path === "/" ? redNeonBorder : ""]}>
         <Image
           class:list={[
@@ -42,7 +49,15 @@ const redNeonBorder =
           alt={"profile"}
         />
       </a>
-      <Separator size={6} additionalClass="hidden lg:block mb-[-6px]" />
+      <div
+        class:list={[
+          "border-[1px]",
+          `h-6`,
+          `border-gray-300`,
+          "hidden lg:block mb-[-6px]",
+        ]}
+      >
+      </div>
       <HeaderNav
         path={path}
         redNeonBorder={redNeonBorder}
@@ -58,17 +73,3 @@ const redNeonBorder =
     </div>
   </nav>
 </header>
-
-<script>
-  // function changeHeader(path: string) {
-  //   const pathName = path.split("/")[1];
-  //   const headerHomeInfo = document.getElementById("header-home-info");
-  //   headerHomeInfo && (headerHomeInfo.textContent = pathName || "About me");
-  // }
-  // window.addEventListener("popstate", () =>
-  //   changeHeader(window.location.pathname)
-  // );
-  // window.addEventListener("pushstate", () =>
-  //   changeHeader(window.location.pathname)
-  // );
-</script>

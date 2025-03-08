@@ -11,10 +11,10 @@
 <table class="modal-table">
   <thead>
     <tr>
-      <th class="main-header">{firstTitle}</th>
-      <th class="second-header">{secondTitle}</th>
+      <th contenteditable="false" class="main-header">{firstTitle}</th>
+      <th contenteditable="false" class="second-header">{secondTitle}</th>
         {#each additionalTitles as title}
-            <th class="second-header">{title}</th>
+            <th contenteditable="false" class="second-header">{title}</th>
         {/each}
     </tr>
   </thead>
@@ -23,7 +23,7 @@
     <tr>
         {#each cell as _, i}
           <td>
-            <div bind:innerHTML={cell[i]} contenteditable='true' ></div>
+            <div bind:innerHTML={cell[i]} contenteditable='false' ></div>
           </td>
         {/each}
       </tr> 

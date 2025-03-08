@@ -1,6 +1,6 @@
 <aside popover="manual" popover-open="true" id="news" class="popover-news">
   <div
-    class="relative top-0 p-px bg-gradient-to-r w-60 h-24 from-blue-500 bg-opacity-70 to-purple-500 overflow-hidden rounded-lg"
+    class="relative top-0 p-px bg-gradient-to-r w-48 h-14 sm:w-60 sm:h-24 from-blue-500 bg-opacity-70 to-purple-500 overflow-hidden rounded-lg"
   >
     <swiper-container
       space-between={5}
@@ -23,7 +23,7 @@
         />
         <p
           id="info-p"
-          class="text-pretty text-white font-thin text-sm absolute bottom-0"
+          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0"
         >
           New version for this portfolio will come soon 🔥
         </p>
@@ -40,7 +40,7 @@
         />
         <p
           id="info-p"
-          class="text-pretty text-white font-thin text-sm absolute bottom-0"
+          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0"
         >
           Check out our latest project updates ❤️
         </p>
@@ -57,7 +57,7 @@
         />
         <p
           id="info-p"
-          class="text-pretty text-white font-thin text-sm absolute bottom-0"
+          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0"
         >
           This images are has been lazy loaded 🚀
         </p>
@@ -66,7 +66,7 @@
   </div>
   <div
     id="pagination"
-    class="absolute text-end h-4 lg:text-center transition-opacity w-full duration-300transform translate-x-0 translate-y-0 z-10"
+    class="absolute text-end h-4 lg:text-center transition-opacity w-full duration-300 transform translate-x-0 translate-y-0 z-10"
   >
   </div>
 </aside>
@@ -82,9 +82,8 @@
         pagination: {
           clickable: false,
           el: "#pagination",
-          bulletActiveClass: "bg-white opacity-100",
-          bulletClass:
-            "size-2! rounded-full bg-black inline-block opacity-50 mx-1",
+          bulletActiveClass: "bullet-active",
+          bulletClass: "bullet",
         },
       };
       Object.assign(swiperEl, options);
@@ -107,12 +106,12 @@
     }
   }
   .popover-news {
-    bottom: 12.5rem;
+    bottom: 8.5rem;
     right: 0.75rem;
     top: auto;
     left: auto;
-    width: 15rem;
-    height: 7.5rem;
+    width: 12rem;
+    height: 5.5rem;
     border-radius: 0.5rem;
     position: fixed;
     background-color: transparent;
@@ -125,10 +124,13 @@
   #info-p {
     text-shadow: 0 0 3px black;
   }
+
   @media (width >= 64rem) {
     .popover-news {
       bottom: 7.5rem;
       right: 2.5rem;
+      width: 15rem;
+      height: 7.5rem;
     }
   }
 </style>
