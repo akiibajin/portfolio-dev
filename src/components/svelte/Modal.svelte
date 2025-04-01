@@ -45,10 +45,10 @@
       ✖
     </button>
     <div class="modal-header">
-      <h4 class="text-center" bind:innerHTML={titleEl} contenteditable="true"></h4>
+      <h4 class="text-center" bind:innerHTML={titleEl} contenteditable="false"></h4>
     </div>
     <div class="modal-body">
-      <div bind:innerHTML={contentEl} class="slot" contenteditable="true"></div>
+      <div bind:innerHTML={contentEl} class="slot" contenteditable="false"></div>
       <ModalTable />
     </div>
 </dialog>

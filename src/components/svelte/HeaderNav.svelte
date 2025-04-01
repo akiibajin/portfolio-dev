@@ -1,7 +1,6 @@
 
 <script lang="ts">
-    let { path } = $props();
-    let isOpen = $state(false);
+    let { path } = $props();    
     const navTabs = [
       { name: "Knowledges", path: "/knowledges" },
       { name: "Experiences", path: "/experiences" },
@@ -12,8 +11,7 @@
 <div class="header-nav">
     <button
     class="menu-button"
-    popovertarget="popover"
-    onclick={()=>(isOpen = !isOpen)}      
+    popovertarget="popover"        
     >
       <span>Open main menu</span>
       <svg
@@ -137,7 +135,7 @@
       margin-bottom: -0.375rem;
     }
     .neon {
-  position: relative;
+      position: relative;
 
 }
 .neon:after {
