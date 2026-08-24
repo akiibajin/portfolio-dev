@@ -218,6 +218,7 @@ export const experienceSection = {
     tableInfo: {
       tableHead: ["Project", "Role", "Duration", "year"],
       tableBody: [
+        ["Textiles CRM", "FullStack Developer", "6 months", "2025"],
         ["CRM desktop app", "FullStack Developer", "4 month", "2024"],
         [
           "Employee's laboratory web app",
