@@ -186,6 +186,8 @@ export const experienceSection = {
     tableInfo: {
       tableHead: ["Project", "Role", "Duration", "year"],
       tableBody: [
+        ["Melt Studio", "FullStack Developer", "1 year", "2025"],
+        ["Evaluar.com", "FullStack Developer", "9 months", "2025"],
         ["Tu360 Movilidad", "Frontend Developer", "2 years, 6 months", "2022"],
         ["FireBase", "FullStack Developer", "6 months", "2021"],
       ],
