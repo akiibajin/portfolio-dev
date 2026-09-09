@@ -5,10 +5,12 @@ import { experienceSection } from "../../global/constants";
 import { slugify } from "../../utils/slugify";
 
 export function getStaticPaths() {
-    return Object.keys(experienceSection).map((name, position) => ({
-        params: { slug: slugify(name) },
-        props: { name, position },
-    }));
+    return (Object.keys(experienceSection) as Array<keyof typeof experienceSection>).map(
+        (name, position) => ({
+            params: { slug: slugify(name) },
+            props: { name, position },
+        })
+    );
 }
 
 const { name, position } = Astro.props;

@@ -1,7 +1,8 @@
 ---
 import DynamicMenu from "../components/svelte/DynamicMenu.svelte";
+import type { TModalKey } from "../utils/getModalContent";
 import Layout from "../layouts/Layout.astro";
-const tabs = [
+const tabs: Array<{ name: TModalKey; path: string }> = [
   {
     name: "Rust",
     path: "/Frontend content",

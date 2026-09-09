@@ -5,10 +5,12 @@ import { knowledgeSection } from "../../global/constants";
 import { slugify } from "../../utils/slugify";
 
 export function getStaticPaths() {
-    return Object.keys(knowledgeSection).map((name, position) => ({
-        params: { slug: slugify(name) },
-        props: { name, position },
-    }));
+    return (Object.keys(knowledgeSection) as Array<keyof typeof knowledgeSection>).map(
+        (name, position) => ({
+            params: { slug: slugify(name) },
+            props: { name, position },
+        })
+    );
 }
 
 const { name, position } = Astro.props;

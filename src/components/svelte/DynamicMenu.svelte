@@ -6,7 +6,7 @@
     name: TModalKey;
     path: string;
   }>;
-  let { tabs, disabled, mode = "navigate" } = $props<{tabs: Ttabs, disabled: boolean | undefined, mode?: "navigate" | "dialog"}>();  
+  let { tabs, disabled, mode = "navigate" } = $props<{tabs: Ttabs, disabled?: boolean, mode?: "navigate" | "dialog"}>();  
 </script>
 
 <!-- Commented tailwindcss code due to bug: https://github.com/tailwindlabs/tailwindcss/issues/15794 -->
