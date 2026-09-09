@@ -1,18 +1,23 @@
 ---
 import DynamicMenu from "../components/svelte/DynamicMenu.svelte";
+import type { TModalKey } from "../utils/getModalContent";
 import Layout from "../layouts/Layout.astro";
-const tabs = [
+const tabs: Array<{ name: TModalKey; path: string }> = [
   {
     name: "Professional Experience",
+    path: "/experiences/professional-experience",
   },
   {
     name: "Personal Experience",
+    path: "/experiences/personal-experience",
   },
   {
     name: "Freelance Experience",
+    path: "/experiences/freelance-experience",
   },
   {
     name: "Certifications",
+    path: "/experiences/certifications",
   },
 ];
 ---

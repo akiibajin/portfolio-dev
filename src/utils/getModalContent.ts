@@ -1,11 +1,15 @@
 import {
   experienceSection,
   knowledgeSection,
+  learningSection,
   type IDefs,
+  type TLearningKeys,
 } from "../global/constants";
 
+export type TModalKey = keyof IDefs | TLearningKeys;
+
 export type IModalContent = Record<
-  keyof IDefs,
+  TModalKey,
   {
     title: string;
     content: string;
@@ -16,10 +20,11 @@ export type IModalContent = Record<
   }
 >;
 
-const getModalContent = (modalType: keyof IDefs) => {
+const getModalContent = (modalType: TModalKey) => {
   const defs: IModalContent = {
     ...knowledgeSection,
     ...experienceSection,
+    ...learningSection,
   };
   return (
     defs?.[modalType] || {

@@ -242,3 +242,68 @@ export const experienceSection = {
     },
   },
 };
+
+export type TLearningKeys = "Rust" | "Angular" | "Qwick" | "Tauri";
+
+export const learningSection: Record<TLearningKeys, {
+  title: string;
+  content: string;
+  tableInfo: {
+    tableHead: Array<string>;
+    tableBody: Array<Array<string>>;
+  };
+}> = {
+  Rust: {
+    title: "Rust",
+    content: `<p class='modal-p'>I'm currently learning <strong>Rust</strong> to
+      build fast and safe tools, from CLI applications to system level crates</p>`,
+    tableInfo: {
+      tableHead: ["Tool", "-"],
+      tableBody: [
+        [
+          '<img src="/rust-icon.png" alt="Rust" class="modal-img" />',
+          "<p>Rust</p>",
+        ],
+      ],
+    },
+  },
+  Angular: {
+    title: "Angular",
+    content: `<p class='modal-p'>Deepening my <strong>Angular</strong> skills with
+      signals, standalone components and state management</p>`,
+    tableInfo: {
+      tableHead: ["Tool", "-"],
+      tableBody: [
+        [
+          '<img src="/angular-icon.png" alt="Angular" class="modal-img" />',
+          "<p>Angular</p>",
+        ],
+      ],
+    },
+  },
+  Qwick: {
+    title: "Qwick",
+    content: `<p class='modal-p'>Exploring <strong>Qwick</strong> to build user
+      interfaces faster and prototype ideas on the go</p>`,
+    tableInfo: {
+      tableHead: ["Tool", "Use case"],
+      tableBody: [
+        ["<p>Qwick</p>", "<p>Rapid UI prototyping</p>"],
+      ],
+    },
+  },
+  Tauri: {
+    title: "Tauri",
+    content: `<p class='modal-p'>Learning <strong>Tauri</strong> to ship lightweight
+      desktop apps combining web technologies with Rust</p>`,
+    tableInfo: {
+      tableHead: ["Tool", "-"],
+      tableBody: [
+        [
+          '<img src="/tauri-icon.webp" alt="Tauri" class="modal-img" />',
+          "<p>Tauri</p>",
+        ],
+      ],
+    },
+  },
+};

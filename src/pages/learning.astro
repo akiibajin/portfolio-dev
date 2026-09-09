@@ -1,7 +1,8 @@
 ---
 import DynamicMenu from "../components/svelte/DynamicMenu.svelte";
+import type { TModalKey } from "../utils/getModalContent";
 import Layout from "../layouts/Layout.astro";
-const tabs = [
+const tabs: Array<{ name: TModalKey; path: string }> = [
   {
     name: "Rust",
     path: "/Frontend content",
@@ -23,6 +24,6 @@ const tabs = [
 
 <Layout title="Learning">
   <main class="lg:m-0! flex-1">
-    <DynamicMenu tabs={tabs} disabled client:only="svelte" />
+    <DynamicMenu tabs={tabs} mode="dialog" client:only="svelte" />
   </main>
 </Layout>

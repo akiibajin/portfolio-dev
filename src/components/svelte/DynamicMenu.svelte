@@ -1,12 +1,12 @@
 <script lang="ts">
   import { currentTab, toggleModal } from "../../store"
   import icon from "../../assets/jin-tattoo.png";
-  import type { IDefs } from '../../global/constants';  
+  import type { TModalKey } from "../../utils/getModalContent";  
   type Ttabs =  Array<{
-    name: keyof IDefs;
+    name: TModalKey;
     path: string;
   }>;
-  let { tabs, disabled } = $props<{tabs: Ttabs, disabled: boolean | undefined}>();  
+  let { tabs, disabled, mode = "navigate" } = $props<{tabs: Ttabs, disabled?: boolean, mode?: "navigate" | "dialog"}>();  
 </script>
 
 <!-- Commented tailwindcss code due to bug: https://github.com/tailwindlabs/tailwindcss/issues/15794 -->
@@ -25,27 +25,29 @@
       alt={"jin tattoo"}
       class={/*"h-6 w-4 opacity-0 group-active:opacity-100 group-focus:opacity-100 group-hover:opacity-100"*/'icon-img'}
       />
+    {#if disabled}
     <button
-      onclick={()=>!disabled &&  toggleModal()}
-      class={
-      "item-button"
-      /*`w-full cursor-pointer rounded-xs pl-3 text-left 
-      group-active:bg-gradient-to-r 
-      group-active:opacity-100
-      group-active:[box-shadow:0_0_10px_#553152,0_0_20px_#553152]
-      group-focus:bg-gradient-to-r 
-      group-focus:opacity-100
-      group-focus:[box-shadow:0_0_10px_#553152,0_0_20px_#553152]
-      group-hover:[box-shadow:0_0_10px_#553152,0_0_20px_#553152] 
-      group-hover:bg-gradient-to-r from-[#D43458] to-[#553152] 
-      lg:group-hover:opacity-100
-      text-xl text-gray-100 lg:opacity-50  
-      transition-[background-color] delay-100 
-      duration-300 ease-in-out`*/
-      }      
+      class={"item-button"}
+      disabled
+      aria-disabled="true"
     >
       {tab.name}
-  </button>
+    </button>
+    {:else if mode === "dialog"}
+    <button
+      class={"item-button"}
+      onclick={() => toggleModal()}
+    >
+      {tab.name}
+    </button>
+    {:else}
+    <a
+      href={tab.path}
+      class={"item-button"}
+    >
+      {tab.name}
+    </a>
+    {/if}
   </li>
     {/each}
   </ul>
@@ -76,15 +78,23 @@
     opacity: 0;
   }
   .item-button{
+    display: block;
     width: 100%;
     cursor: pointer;
     border-radius: 0.25rem;
     padding-left: 0.75rem;
     opacity: 1;
     text-align: left;
+    text-decoration: none;
     color: #fff;
     font-size: 1.25rem;
     transition: background-color 0.3s ease-in-out;
+    border: none;
+    background-color: transparent;
+  }
+  .item-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.4;
   }
   .menu-list-item:hover .icon-img,
   .menu-list-item:focus .icon-img

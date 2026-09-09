@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterSelect from "../../components/svelte/CharacterSelect.svelte";
+import { experienceSection } from "../../global/constants";
+import { slugify } from "../../utils/slugify";
+
+export function getStaticPaths() {
+    return (Object.keys(experienceSection) as Array<keyof typeof experienceSection>).map(
+        (name, position) => ({
+            params: { slug: slugify(name) },
+            props: { name, position },
+        })
+    );
+}
+
+const { name, position } = Astro.props;
+---
+
+<Layout title={name}>
+    <section class="lg:m-0! flex-1 min-w-full size-full max-w-none!">
+        <CharacterSelect
+            name={name}
+            position={position}
+            backPath="/experiences"
+            client:only="svelte"
+        />
+    </section>
+</Layout>

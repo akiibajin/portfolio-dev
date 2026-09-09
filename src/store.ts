@@ -1,7 +1,7 @@
 import { atom } from "nanostores";
-import type { IDefs } from "./global/constants";
+import type { TModalKey } from "./utils/getModalContent";
 
-export const currentTab = atom<{ name: keyof IDefs; position: number }>({
+export const currentTab = atom<{ name: TModalKey; position: number }>({
   position: 0,
   name: "Frontend",
 });
