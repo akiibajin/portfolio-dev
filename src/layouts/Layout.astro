@@ -4,54 +4,62 @@ import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BackGroundCarrousel from "../components/Carrousel/BackGroundCarrousel.astro";
-import Modal from "../components/svelte/Modal.svelte";
 import News from "../components/News.astro";
+import Modal from "../components/svelte/Modal.svelte";
 interface Props {
-  title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/+$/, "");
+const isCharacterSelect = /^\/(knowledges|experiences)\/[^/]+$/.test(path);
+const isLearning = path === "/learning";
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/icons8-xbox-a-hatch-32.png" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <ClientRouter />
-  </head>
-  <body class="size-full m-0 flex flex-col gap-4">
-    <Header />
-    <slot />
-    <BackGroundCarrousel />
-    <News />
-    <Modal client:only="svelte" />
-    <Footer />
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/icons8-xbox-a-hatch-32.png"
+        />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <ClientRouter />
+    </head>
+    <body class="m-0 flex flex-col gap-4">
+        {!isCharacterSelect && <Header />}
+        <slot />
+        <BackGroundCarrousel />
+        {!isCharacterSelect && <News />}
+        {isLearning && <Modal client:only="svelte" />}
+        {!isCharacterSelect && <Footer />}
+    </body>
 </html>
 <style is:global>
-  @font-face {
-    font-family: "BebasNeue";
-    src: url("/fonts/Bebas-Neue-Pro-Regular-BF66cf3d7814160.ttf");
-  }
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: "BebasNeue";
-    background-size: 224px;
-    color: white;
-  }
+    @font-face {
+        font-family: "BebasNeue";
+        src: url("/fonts/Bebas-Neue-Pro-Regular-BF66cf3d7814160.ttf");
+    }
+    :root {
+        --accent: 136, 58, 234;
+        --accent-light: 224, 204, 250;
+        --accent-dark: 49, 10, 101;
+        --accent-gradient: linear-gradient(
+            45deg,
+            rgb(var(--accent)),
+            rgb(var(--accent-light)) 30%,
+            white 60%
+        );
+    }
+    html {
+        font-family: "BebasNeue";
+        background-size: 224px;
+        color: white;
+    }
 </style>

@@ -56,11 +56,18 @@ import XboxA from "./icons/Xbox-A.astro";
 <script>
   import { currentTab } from "../store";
   import { defs, type IDefs } from "../global/constants";
-  currentTab.subscribe((value: { name: keyof IDefs; position: number }) => {
+  import type { TModalKey } from "../utils/getModalContent";
+
+  const isDefKey = (name: TModalKey): name is keyof IDefs =>
+    name in defs;
+
+  currentTab.subscribe((value: { name: TModalKey; position: number }) => {
     const info = document.getElementById("info");
     if (info) {
       info.classList.remove("animate-marquee");
-      info.textContent = defs?.[value.name] || defs.Frontend;
+      info.textContent = isDefKey(value.name)
+        ? defs[value.name]
+        : defs.Frontend;
       setTimeout(() => {
         info.classList.add("animate-marquee");
       }, 5000);
