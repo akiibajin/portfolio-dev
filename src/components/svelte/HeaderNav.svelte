@@ -1,20 +1,47 @@
 
 <script lang="ts">
-    let { path } = $props();    
+    let { path } = $props();
+    let isOpen = $state(false);
+    let isClosing = $state(false);
     const navTabs = [
       { name: "Knowledges", path: "/knowledges" },
       { name: "Experiences", path: "/experiences" },
       { name: "Learning", path: "/learning" },
       { name: "Contact me", path: "/contact" },
     ];
+
+    function toggleMenu() {
+      if (isOpen) {
+        isClosing = true;
+        setTimeout(() => { isOpen = false; isClosing = false; }, 300);
+      } else {
+        isOpen = true;
+      }
+    }
+
+    function closeMenu() {
+      if (isOpen) {
+        isClosing = true;
+        setTimeout(() => { isOpen = false; isClosing = false; }, 300);
+      }
+    }
 </script>
+
+<svelte:window on:click={(e) => {
+  const target = e.target as HTMLElement;
+  if (!target.closest('.menu-button') && !target.closest('.menu-nav')) {
+    closeMenu();
+  }
+}} />
+
 <div class="header-nav">
     <button
     class="menu-button"
-    popovertarget="popover"        
+    onclick={toggleMenu}
     >
       <span>Open main menu</span>
       <svg
+        class:hidden={isOpen}
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +51,7 @@
           clip-rule="evenodd"></path></svg
       >
       <svg
-        class="hidden"
+        class:hidden={!isOpen}
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -34,8 +61,8 @@
           clip-rule="evenodd"></path></svg
       >
     </button>
-  </div> 
-  <nav popover='auto' id='popover' class={`menu-nav`}>
+  </div>
+  <nav class='menu-nav' class:open={isOpen} class:closing={isClosing}>
     <ul>
       {#each navTabs as tab}
         <li
@@ -43,6 +70,7 @@
         >
           <a
             href={tab.path}
+            onclick={closeMenu}
             >{tab.name}</a
           >
         </li>
@@ -90,26 +118,35 @@
       display: none;
     }
 
-    .menu-nav:popover-open{
-      scale: 1;
-      transition: scale 0.3s ease-in-out, opacity 0.3s ease-in-out;
-      @starting-style { 
-        scale: 0; 
-      }
-    }
     .menu-nav{
-      transform: translate(13%, 50%);
-      bottom: 75%;
-      right: 50%;      
+      display: none;
+      top: 75px;
+      left: 50%;
+      transform: translate(-50%);
+      transform-origin: top left;
       position: fixed;
       width: 80dvw;
-      scale: 0;
-      transition: scale 0.3s ease, display 0.3s ease allow-discrete; 
       background-color: #333;
+    }
+    .menu-nav.open{
+      display: block;
+      animation: menu-in 0.3s ease-in-out;
+    }
+    @keyframes menu-in {
+      from { opacity: 0; transform: translate(-50%) scale(0); }
+      to { opacity: 1; transform: translate(-50%) scale(1); }
+    }
+    .menu-nav.closing{
+      display: block;
+      animation: menu-out 0.3s ease-in-out forwards;
+    }
+    @keyframes menu-out {
+      from { opacity: 1; transform: translate(-50%) scale(1); }
+      to { opacity: 0; transform: translate(-50%) scale(0); }
     }
     .menu-nav ul{
       display: flex;
-      flex-direction: column;      
+      flex-direction: column;
       font-weight: 500;
       align-items: center;
     }
@@ -122,7 +159,7 @@
     }
     .menu-nav ul li a{
       display: block;
-      padding: 0.5rem 1rem 0 0.75rem;      
+      padding: 0.5rem 1rem 0 0.75rem;
       width: 100%;
       text-decoration: none;
       color: #fff;
@@ -152,7 +189,7 @@
 }
 @media (width >= 64rem /* 1024px */) {
   .neon:after {
-    display: block; 
+    display: block;
   }
 }
     @media (min-width: 48rem){
@@ -175,17 +212,17 @@
         height: auto !important;
         top: 0;
         left: 0;
-        scale: 1;
         width: max-content;
         background-color: transparent;
         transform: none;
         display: flex !important;
+        animation: none;
       }
       .menu-nav ul{
-        flex-direction: row;                  
+        flex-direction: row;
       }
       .menu-nav ul li{
-        border-bottom: 0;        
+        border-bottom: 0;
         width: auto;
         padding:  0.75rem;
       }
