@@ -39,7 +39,7 @@ import XboxA from "./icons/Xbox-A.astro";
             </li>
         </ul>
     </nav>
-    <div class="w-[70vw] ml-4 sm:w-[45vw] overflow-hidden whitespace-nowrap">
+    <div class="w-[70vw] ml-4 md:ml-0 sm:w-[45vw] overflow-hidden whitespace-nowrap">
         <p class="inline-block text-cyan-300" id="info">
             Here you can find a resume of each tab
         </p>
@@ -47,10 +47,10 @@ import XboxA from "./icons/Xbox-A.astro";
     <Separator
         color="blue-300"
         orientation="horizontal"
-        additionalClass="border-cyan-300 w-[70vw] sm:w-[45vw]"
+        additionalClass="border-cyan-300 ml-4 md:ml-0 w-[70vw] sm:w-[45vw]"
         size={"[45vw]"}
     />
-    <div class="flex text-white mt-2.5">
+    <div class="flex text-white ml-4 md:ml-0 mt-2.5">
         <p class="flex gap-1.5 text-xs items-center">
             <XboxA className="mx-auto w-3.5" />
             <span class="h-min">Confirm</span>
