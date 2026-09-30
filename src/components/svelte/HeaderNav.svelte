@@ -3,6 +3,7 @@
     let { path } = $props();
     let isOpen = $state(false);
     let isClosing = $state(false);
+    let menuButton: HTMLButtonElement | null = $state(null);
     const navTabs = [
       { name: "Knowledges", path: "/knowledges" },
       { name: "Experiences", path: "/experiences" },
@@ -25,6 +26,15 @@
         setTimeout(() => { isOpen = false; isClosing = false; }, 300);
       }
     }
+
+    function onKeydown(e: KeyboardEvent) {
+      if (!isOpen) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeMenu();
+        menuButton?.focus();
+      }
+    }
 </script>
 
 <svelte:window on:click={(e) => {
@@ -32,16 +42,22 @@
   if (!target.closest('.menu-button') && !target.closest('.menu-nav')) {
     closeMenu();
   }
-}} />
+}} on:keydown={onKeydown} />
 
 <div class="header-nav">
     <button
     class="menu-button"
+    type="button"
+    aria-expanded={isOpen}
+    aria-controls="primary-menu"
+    bind:this={menuButton}
     onclick={toggleMenu}
     >
       <span>Open main menu</span>
       <svg
         class:hidden={isOpen}
+        aria-hidden="true"
+        focusable="false"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +68,8 @@
       >
       <svg
         class:hidden={!isOpen}
+        aria-hidden="true"
+        focusable="false"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +80,7 @@
       >
     </button>
   </div>
-  <nav class='menu-nav' class:open={isOpen} class:closing={isClosing}>
+  <nav id="primary-menu" class='menu-nav' class:open={isOpen} class:closing={isClosing} aria-label="Main">
     <ul>
       {#each navTabs as tab}
         <li
@@ -70,11 +88,12 @@
         >
           <a
             href={tab.path}
+            aria-current={path.includes(tab.path) ? "page" : undefined}
             onclick={closeMenu}
             >{tab.name}</a
           >
+          <div class='separator' aria-hidden="true"></div>
         </li>
-        <div class='separator'></div>
       {/each}
     </ul>
   </nav>
@@ -98,6 +117,10 @@
       margin-left: 0.25rem;
       color: #fff;
       border-radius: 0.25rem;
+    }
+    .menu-button:focus-visible {
+      outline: 2px solid #D43458;
+      outline-offset: 2px;
     }
     .menu-button span {
       position: absolute;
@@ -164,6 +187,10 @@
       text-decoration: none;
       color: #fff;
     }
+    .menu-nav ul li a:focus-visible {
+      outline: 2px solid #D43458;
+      outline-offset: -2px;
+    }
     .separator {
       display: none;
       height: 1.5rem;
@@ -224,7 +251,13 @@
       .menu-nav ul li{
         border-bottom: 0;
         width: auto;
-        padding:  0.75rem;
+        /* Right padding becomes the flex gap, so the separator still sits
+           exactly one label-gap away from the text as it did when it was a
+           sibling of the <li> and a direct flex item of the row. */
+        padding: 0.75rem 0 0.75rem 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
       }
       .menu-nav ul li a{
         color: #99a1af;
@@ -235,8 +268,12 @@
       .menu-nav ul li a:hover{
         color: #fff;
       }
+      .menu-nav ul li a:focus-visible {
+        outline-offset: 3px;
+      }
       .separator {
         display: block;
+        flex: none;
       }
     }
   </style>

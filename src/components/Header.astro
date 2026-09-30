@@ -4,24 +4,30 @@ import lb from "../assets/R.png";
 import rb from "../assets/rb.png";
 import profile from "../assets/profile.jpg";
 import HeaderNav from "./svelte/HeaderNav.svelte";
+import { profile as identity } from "../global/constants";
 
 const path = Astro.url.pathname;
+const isHome = path === "/";
 const redNeonBorder =
   "relative  after:content-[''] after:rounded-xs after:hidden lg:after:block after:absolute after:left-0 after:bottom-1 after:w-full after:h-[4px] after:bg-[#D43458] after:[box-shadow:0_0_10px_#D43458,0_0_20px_#D43458]";
 ---
 
-<header>
-  <nav class="border-gray-200 px-4 lg:px-8 pt-8 lg:pt-10">
-    <h1
-      class="hidden lg:block self-center tracking-wide text-3xl mb-3 whitespace-nowrap"
-    >
+<header class="shrink-0">
+  <nav class="border-gray-200 px-4 lg:px-8 pt-8 lg:pt-10" aria-label="Profile">
+    <p class="hidden lg:block self-center tracking-wide text-3xl mb-3 whitespace-nowrap">
       Main Menu
-    </h1>
-    <span
+    </p>
+    <p
       id="header-home-info"
-      class="text-gray-800 opacity-80 dark:text-white font-medium text-base px-4 lg:px-8 py-2 lg:py-2.5 mr-2 fixed top-8 right-8 lg:top-10 lg:right-12 bg-gray-700 focus:outline-none"
-      >Hector Robayo</span
+      class="pointer-events-none m-0 mb-2 flex flex-col gap-[0.1rem] self-start rounded-[2px] border border-[#4a5565] border-l-[3px] border-l-[#d43458] bg-[rgb(38_38_38/0.8)] px-3 py-1.5 text-left lg:fixed lg:top-8 lg:right-8 lg:z-30 lg:mb-0 lg:mr-2 lg:border-l-[1px] lg:border-l-[#4a5565] lg:border-r-[3px] lg:border-r-[#d43458] lg:text-right"
     >
+      <span class="text-lg leading-[1.1] uppercase tracking-[0.12em] text-white">
+        {identity.name}
+      </span>
+      <span class="font-sans text-[0.65rem] leading-[1.2] tracking-[0.08em] text-[#aab2be]">
+        {identity.title}
+      </span>
+    </p>
     <div class="flex flex-wrap items-center max-w-screen-md">
       <Image
         src={lb}
@@ -38,15 +44,24 @@ const redNeonBorder =
         ]}
       >
       </div>
-      <a href="/" class:list={["px-4", path === "/" ? redNeonBorder : ""]}>
+      <a
+        href="/"
+        aria-label={`${identity.name} — home`}
+        aria-current={isHome ? "page" : undefined}
+        class:list={[
+          "px-4 rounded-xs",
+          isHome ? redNeonBorder : "",
+          "focus-visible:outline-2 focus-visible:outline-[#d43458] focus-visible:outline-offset-2",
+        ]}
+      >
         <Image
           class:list={[
             "mt-3 mx-auto w-8 hover:opacity-100 sm:w-7 mb-2 ",
-            path === "/" ? "opacity-100" : "opacity-50",
+            isHome ? "opacity-100" : "opacity-50",
           ]}
           loading={"lazy"}
           src={profile}
-          alt={"profile"}
+          alt={""}
         />
       </a>
       <div

@@ -16,13 +16,13 @@ export function getStaticPaths() {
 const { name, position } = Astro.props;
 ---
 
-<Layout title={name}>
-    <section class="lg:m-0! flex-1 min-w-full size-full max-w-none!">
+<Layout title={`${name} — Experience`}>
+    <main class="m-0 w-full max-w-none overflow-visible p-0">
         <CharacterSelect
             name={name}
             position={position}
             backPath="/experiences"
-            client:only="svelte"
+            client:load
         />
-    </section>
+    </main>
 </Layout>

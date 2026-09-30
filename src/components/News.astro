@@ -1,4 +1,4 @@
-<aside popover="manual" popover-open="true" id="news" class="popover-news">
+<aside popover="manual" popover-open="true" id="news" class="popover-news" aria-label="Latest updates">
   <div
     class="relative top-0 p-px bg-gradient-to-r w-48 h-14 sm:w-60 sm:h-24 from-blue-500 bg-opacity-70 to-purple-500 overflow-hidden rounded-lg"
   >
@@ -17,15 +17,15 @@
       >
         <img
           src="/slide%201.avif"
-          alt="marshall law"
+          alt="Marshall Law"
           loading="lazy"
+          decoding="async"
           class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
         <p
-          id="info-p"
-          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0"
+          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0 [text-shadow:0_0_3px_black]"
         >
-          New version for this portfolio will come soon 🔥
+          A new version of this portfolio is on the way
         </p>
       </swiper-slide>
       <swiper-slide
@@ -34,15 +34,15 @@
       >
         <img
           src="/slide%202.jpg"
-          alt="kazuya mishima"
+          alt="Kazuya Mishima"
           loading="lazy"
+          decoding="async"
           class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
         <p
-          id="info-p"
-          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0"
+          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0 [text-shadow:0_0_3px_black]"
         >
-          Check out our latest project updates ❤️
+          Latest updates from my projects
         </p>
       </swiper-slide>
       <swiper-slide
@@ -51,15 +51,15 @@
       >
         <img
           src="/slide%203.webp"
+          alt="Jin Kazama"
           loading="lazy"
-          alt="jin kazama"
+          decoding="async"
           class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
         <p
-          id="info-p"
-          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0"
+          class="text-pretty text-white font-thin text-xs md:text-sm absolute bottom-0 [text-shadow:0_0_3px_black]"
         >
-          This images are has been lazy loaded 🚀
+          Background art loads lazily to keep the first paint fast
         </p>
       </swiper-slide>
     </swiper-container>
@@ -120,9 +120,6 @@
     transition:
       scale 0.15s ease-in-out,
       display 0.15s ease-in-out allow-discrete;
-  }
-  #info-p {
-    text-shadow: 0 0 3px black;
   }
 
   @media (width >= 64rem) {

@@ -6,45 +6,68 @@ import Footer from "../components/Footer.astro";
 import BackGroundCarrousel from "../components/Carrousel/BackGroundCarrousel.astro";
 import News from "../components/News.astro";
 import Modal from "../components/svelte/Modal.svelte";
+import { profile } from "../global/constants";
+
 interface Props {
     title: string;
+    description?: string;
 }
 
-const { title } = Astro.props;
+const {
+    title,
+    description = `${profile.name} — ${profile.title}. Building scalable web applications and intuitive user experiences with React, Next.js, TypeScript and Node.js.`,
+} = Astro.props;
 
 const path = Astro.url.pathname.replace(/\/+$/, "");
 const isCharacterSelect = /^\/(knowledges|experiences)\/[^/]+$/.test(path);
 const isLearning = path === "/learning";
+const pageTitle = title.includes(profile.name) ? title : `${title} — ${profile.name}`;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#0a0413" />
+        <meta name="author" content={profile.fullName} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
         <link
             rel="icon"
             type="image/svg+xml"
             href="/icons8-xbox-a-hatch-32.png"
         />
         <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
+        <title>{pageTitle}</title>
         <ClientRouter />
     </head>
-    <body class="m-0 flex flex-col gap-4">
-        {!isCharacterSelect && <Header />}
-        <slot />
-        <BackGroundCarrousel />
-        {!isCharacterSelect && <News />}
-        {isLearning && <Modal client:only="svelte" />}
-        {!isCharacterSelect && <Footer />}
-    </body>
+<body class="m-0 flex flex-col gap-4">
+  {!isCharacterSelect && <Header />}
+  <!-- The only scrollable region in the layout: header and footer stay
+       visible while this scrolls. `min-h-0` is required, otherwise the flex
+       item refuses to shrink below its content height and body overflows.
+       `overflow-x: clip` (not `hidden`) so it does not force `overflow-y` to
+       become a scroll container too. -->
+  <div
+    id="scroll-region"
+    class="min-h-0 flex-1 overflow-y-auto overflow-x-clip overscroll-contain"
+  >
+    <slot />
+  </div>
+  <BackGroundCarrousel />
+  {!isCharacterSelect && <News />}
+  {isLearning && <Modal client:only="svelte" />}
+  {!isCharacterSelect && <Footer />}
+</body>
 </html>
 <style is:global>
     @font-face {
         font-family: "BebasNeue";
         src: url("/fonts/Bebas-Neue-Pro-Regular-BF66cf3d7814160.ttf");
+        font-display: swap;
     }
     :root {
         --accent: 136, 58, 234;
@@ -58,8 +81,18 @@ const isLearning = path === "/learning";
         );
     }
     html {
-        font-family: "BebasNeue";
-        background-size: 224px;
+        font-family: "BebasNeue", "Arial Narrow", ui-sans-serif, system-ui,
+            sans-serif;
         color: white;
     }
 </style>
+
+<script>
+  // The scrollable region is a plain element now, so Astro's own scroll reset
+  // (which targets `window`) no longer reaches the content. Reset the region
+  // explicitly, otherwise navigating from a scrolled page lands mid-way down
+  // the next one.
+  document.addEventListener("astro:before-preparation", () => {
+    document.getElementById("scroll-region")?.scrollTo({ top: 0 });
+  });
+</script>
