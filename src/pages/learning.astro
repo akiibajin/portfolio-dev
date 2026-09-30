@@ -2,24 +2,14 @@
 import DynamicMenu from "../components/svelte/DynamicMenu.svelte";
 import type { TModalKey } from "../utils/getModalContent";
 import Layout from "../layouts/Layout.astro";
-const tabs: Array<{ name: TModalKey; path: string }> = [
-  {
-    name: "Rust",
-    path: "/Frontend content",
-  },
-  {
-    name: "Angular",
-    path: "/Backend content",
-  },
-  {
-    name: "Qwick",
-    path: "/DevOps content",
-  },
-  {
-    name: "Tauri",
-    path: "/Design content",
-  },
-];
+import { learningSection } from "../global/constants";
+
+const tabs: Array<{ name: TModalKey; path: string }> = (
+  Object.keys(learningSection) as Array<keyof typeof learningSection>
+).map((name) => ({
+  name,
+  path: `/learning#${name.toLowerCase()}`,
+}));
 ---
 
 <Layout title="Learning">

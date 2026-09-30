@@ -1,21 +1,32 @@
 @import "tailwindcss";
 
+html {
+  /* `100vw` includes the scrollbar gutter and caused horizontal overflow. */
+  overflow-x: clip;
+  height: 100%;
+}
+
 body {
   margin: 0;
-  height: 100dvh;
-  width: 100dvw;
+  width: 100%;
   position: relative;
+  /* App-shell layout: the header and footer stay put and only the content
+     region scrolls. Locking the root to exactly one viewport is what makes
+     that work — with the document scrolling, the header and footer would move
+     out of view regardless of any z-index. */
+  height: 100dvh;
+  overflow: hidden;
 }
 
 main {
   margin: auto;
   padding: 1rem;
-  width: 800px;
-  max-width: calc(100% - 2rem);
+  width: min(100%, 800px);
   color: white;
   line-height: 1.6;
-  overflow: auto;
+  overflow: visible;
 }
+
 .bullet {
   width: 0.5rem !important;
   height: 0.5rem !important;
@@ -29,6 +40,24 @@ main {
   background-color: white;
   opacity: 1;
 }
+
+/* A visible focus ring for anything that does not define its own. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid #d43458;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @theme {
   --animate-gradient-bg: gradient 15s ease infinite;
   @keyframes gradient {
@@ -40,6 +69,50 @@ main {
     }
     100% {
       background-position: 0% 50%;
+    }
+  }
+  --animate-marquee: marquee 24s linear 2s 2;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Backdrop carousel stages. Kept here so the slide components stay
+     utility-class only, matching the rest of the .astro markup. */
+  --animate-stage-shift: stage-shift 20s ease-in-out infinite;
+  @keyframes stage-shift {
+    0% {
+      background-position: 0 0, 0% 50%;
+    }
+    50% {
+      background-position: 0 0, 100% 50%;
+    }
+    100% {
+      background-position: 0 0, 0% 50%;
+    }
+  }
+  --animate-drift-a: drift-a 16s ease-in-out infinite;
+  @keyframes drift-a {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(6vmax, 4vmax, 0) scale(1.15);
+    }
+  }
+  --animate-drift-b: drift-b 19s ease-in-out infinite;
+  @keyframes drift-b {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1.1);
+    }
+    50% {
+      transform: translate3d(-5vmax, -3vmax, 0) scale(1);
     }
   }
 }

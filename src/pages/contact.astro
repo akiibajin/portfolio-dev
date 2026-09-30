@@ -1,47 +1,78 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { profile } from "../global/constants";
+
+const channels = [
+  { label: "Email", value: profile.email, href: `mailto:${profile.email}`, external: false },
+  { label: "WhatsApp", value: profile.phone, href: profile.whatsapp, external: true },
+  { label: "LinkedIn", value: "hec-rob-dev", href: profile.linkedin, external: true },
+  { label: "GitHub", value: "akiibajin", href: profile.github, external: true },
+];
 ---
 
 <Layout title="Contact me">
-    <main class="flex flex-col items-start flex-1">
-        <h1 class="text-2xl md:text-4xl font-bold text-center w-full">
-            Here you can find my contact info 📬
-        </h1>
-        <div class="flex flex-col w-full justify-center mt-4 space-y-4 text-center">
-            <a
-                href="mailto:julianrobayo8000@gmail.com"
-                class="text-cyan-500 text-3xl hover:underline"
+    <main class="mx-auto w-full max-w-[46rem] box-border px-5 pt-4 pb-12">
+        <div
+            class="rounded border border-[#3d4552] border-l-[3px] border-l-[#d43458] bg-[rgb(10_10_10/0.72)] p-[clamp(1.25rem,4vw,2.25rem)] shadow-[inset_0_0_60px_rgb(85_49_82/0.45)]"
+        >
+            <p class="m-0 mb-2 text-[0.7rem] uppercase tracking-[0.3em] text-[#8f98a6]">
+                New challenger
+            </p>
+
+            <h1
+                class="m-0 text-[clamp(2rem,9vw,3.25rem)] font-medium uppercase tracking-[0.08em] text-white [text-shadow:0_0_18px_rgb(212_52_88/0.5)]"
             >
-                Email me 📧
-            </a>
-            <a
-                href="https://wa.me/+573195682917"
-                target="_blank"
-                class="text-cyan-500 text-3xl hover:underline"
+                Contact me
+            </h1>
+
+            <p
+                class="mt-4 mb-0 max-w-[32rem] font-sans text-[0.95rem] leading-[1.65] text-pretty text-[#dfe3ea]"
             >
-                WhatsApp 📞
-            </a>
-            <a
-                href="https://www.linkedin.com/in/hec-rob-dev/"
-                target="_blank"
-                class="text-cyan-500 text-3xl hover:underline"
+                Open to senior full-stack roles. The fastest way to reach me is
+                email or LinkedIn — I reply to both.
+            </p>
+
+            <ul class="mt-7 mb-0 grid list-none gap-2 p-0">
+                {
+                    channels.map((channel) => (
+                        <li>
+                            <a
+                                class="flex flex-wrap items-baseline gap-x-4 gap-y-0.5 rounded-[2px] border border-[#3d4552] border-l-[3px] border-l-[#4a5565] bg-[rgb(38_38_38/0.75)] px-3.5 py-2.5 no-underline transition-[box-shadow,border-color,background-color] duration-150 hover:border-l-[#d43458] hover:bg-[rgb(85_49_82/0.6)] hover:shadow-[0_0_12px_rgb(85_49_82/0.7)] focus-visible:outline-2 focus-visible:outline-[#d43458] focus-visible:outline-offset-2 motion-reduce:transition-none"
+                                href={channel.href}
+                                target={channel.external ? "_blank" : undefined}
+                                rel={channel.external ? "noreferrer noopener" : undefined}
+                            >
+                                <span class="w-full text-[0.7rem] uppercase tracking-[0.2em] text-[#8f98a6] sm:w-26">
+                                    {channel.label}
+                                </span>
+                                <span class="font-sans text-[0.95rem] break-words text-white">
+                                    {channel.value}
+                                </span>
+                            </a>
+                        </li>
+                    ))
+                }
+                <li>
+                    <a
+                        class="flex flex-wrap items-baseline gap-x-4 gap-y-0.5 rounded-[2px] border border-[#3d4552] border-l-[3px] border-l-[#4a5565] bg-[rgb(38_38_38/0.75)] px-3.5 py-2.5 no-underline transition-[box-shadow,border-color,background-color] duration-150 hover:border-l-[#d43458] hover:bg-[rgb(85_49_82/0.6)] hover:shadow-[0_0_12px_rgb(85_49_82/0.7)] focus-visible:outline-2 focus-visible:outline-[#d43458] focus-visible:outline-offset-2 motion-reduce:transition-none"
+                        href={profile.cv}
+                        download
+                    >
+                        <span class="w-full text-[0.7rem] uppercase tracking-[0.2em] text-[#8f98a6] sm:w-26">
+                            CV
+                        </span>
+                        <span class="font-sans text-[0.95rem] break-words uppercase tracking-[0.08em] text-[#f3e6ec]">
+                            Download my CV (PDF)
+                        </span>
+                    </a>
+                </li>
+            </ul>
+
+            <p
+                class="mt-6 mb-0 border-t border-[#3d4552] pt-3.5 text-[0.75rem] uppercase tracking-[0.1em] text-[#8f98a6]"
             >
-                LinkedIn 🏢
-            </a>
-            <a
-                href="/HECTOR CV 2026.pdf"
-                download
-                class="text-cyan-500 text-3xl hover:underline"
-            >
-                Download my CV 📃
-            </a>
-            <a
-                href="https://github.com/akiibajin"
-                target="_blank"
-                class="text-cyan-500 text-3xl hover:underline"
-            >
-                GitHub 🐈‍⬛
-            </a>
+                {profile.location} · {profile.languages}
+            </p>
         </div>
     </main>
 </Layout>

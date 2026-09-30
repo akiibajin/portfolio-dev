@@ -2,27 +2,18 @@
 import DynamicMenu from "../components/svelte/DynamicMenu.svelte";
 import type { TModalKey } from "../utils/getModalContent";
 import Layout from "../layouts/Layout.astro";
-const tabs: Array<{ name: TModalKey; path: string }> = [
-  {
-    name: "Frontend",
-    path: "/knowledges/frontend",
-  },
-  {
-    name: "Backend",
-    path: "/knowledges/backend",
-  },
-  {
-    name: "DevOps",
-    path: "/knowledges/devops",
-  },
-  {
-    name: "Methodologies",
-    path: "/knowledges/methodologies",
-  },
-];
+import { knowledgeSection } from "../global/constants";
+import { slugify } from "../utils/slugify";
+
+const tabs: Array<{ name: TModalKey; path: string }> = (
+  Object.keys(knowledgeSection) as Array<keyof typeof knowledgeSection>
+).map((name) => ({
+  name,
+  path: `/knowledges/${slugify(name)}`,
+}));
 ---
 
-<Layout title="Knowledges">
+<Layout title="Knowledge">
   <main class="lg:m-0! flex-1">
     <DynamicMenu tabs={tabs} client:only="svelte" />
   </main>

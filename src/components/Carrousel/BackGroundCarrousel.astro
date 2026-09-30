@@ -4,6 +4,7 @@ import FirstSlide from "./FirstSlide.astro";
 import SecondSlide from "./SecondSlide.astro";
 import ThirdSlide from "./ThirdSlide.astro";
 import FourthSlide from "./FourthSlide.astro";
+import FifthSlide from "./FifthSlide.astro";
 ---
 
 <div class="fixed top-0 left-0 size-full -z-1">
@@ -13,16 +14,11 @@ import FourthSlide from "./FourthSlide.astro";
     effect="fade"
     class="size-full"
   >
-    <swiper-slide>
-      <FirstSlide />
-    </swiper-slide>
-    <swiper-slide>
-      <SecondSlide />
-    </swiper-slide>
-    <swiper-slide>
-      <ThirdSlide />
-    </swiper-slide>
+    <swiper-slide> <FirstSlide /></swiper-slide>
+    <swiper-slide> <SecondSlide /></swiper-slide>
+    <swiper-slide> <ThirdSlide /></swiper-slide>
     <swiper-slide> <FourthSlide /></swiper-slide>
+    <swiper-slide> <FifthSlide /></swiper-slide>
   </swiper-container>
 </div>
 
@@ -30,10 +26,15 @@ import FourthSlide from "./FourthSlide.astro";
   import { register } from "swiper/element/bundle";
   import { currentTab } from "../../store";
   register();
-  currentTab.subscribe((value) => {
+
+  // Swiper initialises on astro:page-load under the ClientRouter, and the Svelte
+  // islands hydrate independently, so the stage is synced on load and then kept
+  // in step with the highlighted tab.
+  const syncStage = () => {
     const swiperEl = document.querySelector("swiper-container");
-    if (swiperEl) {
-      swiperEl.swiper.slideTo(value.position);
-    }
-  });
+    swiperEl?.swiper?.slideTo(currentTab.get().position);
+  };
+
+  document.addEventListener("astro:page-load", syncStage);
+  currentTab.subscribe(syncStage);
 </script>
